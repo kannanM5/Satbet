@@ -1,0 +1,30 @@
+.needHelp {
+  color: white;
+  text-align: left;
+}
+
+.needHelp:hover {
+  color: var(--primary);
+}
+
+.menuModal {
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 250px;
+  padding: 10px;
+}
+.menuItem {
+  margin: 0px;
+  font-size: 12px;
+  margin-left: 8px;
+  opacity: 0.7;
+}
+
+@media (max-width: 576px) {
+  .menuModal {
+    width: 200px;
+  }
+  .menuItem {
+    font-size: 10px;
+  }
+}

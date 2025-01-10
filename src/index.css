@@ -1,0 +1,84 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --regular: "Regular-text";
+  --bold: "Bold-text";
+  --medium: "Medium-text";
+  --light: "Light-text";
+  --semi-bold: "Semi-Bold-text";
+  --primary: #ebba48;
+  --danger: #f14a45;
+  --white: white;
+  --inputBorder: 0.5px solid rgba(0, 0, 0, 0.25);
+  --black: black;
+  --fontweight: 600;
+  --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --btnClr: #004c97;
+  --skyBlue: #0076b7;
+  --lightBorder: 1px solid #ebe5e5;
+}
+
+@font-face {
+  font-family: "Extra-bold-text";
+  src: url("./Assets/Fonts/Poppins-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Regular-text";
+  src: url("./Assets/Fonts/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Medium-text";
+  src: url("./Assets/Fonts/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Semi-Bold-text";
+  src: url("./Assets/Fonts/Poppins-SemiBoldd.ttf");
+}
+
+@font-face {
+  font-family: "Bold-text";
+  src: url("./Assets/Fonts/Poppins-Bold.ttf");
+}
+
+p {
+  margin: 0px;
+}
+
+.custom-carousel .carousel-control-prev,
+.custom-carousel .carousel-control-next {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.custom-carousel .carousel-control-prev-icon,
+.custom-carousel .carousel-control-next-icon {
+  width: 20px;
+  height: 20px;
+  filter: invert(1); /* Makes the arrow white */
+}
+
+.custom-carousel .carousel-item img {
+  width: 400px; /* Adjust width as needed */
+  height: 400px; /* Adjust height as needed */
+  object-fit: cover; /* Ensures the image fills the circular shape */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+
+.form-select {
+  /* opacity: 0.3 !important; */
+  border: 1px solid #3f3f3f !important;
+  background-color: transparent !important;
+  /* background: url("./Assests/Png/downArrowWhite.png") no-rep/eat; */
+}

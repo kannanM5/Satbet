@@ -1,0 +1,315 @@
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: var(--black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.imageContainer {
+  width: 400px;
+  height: 60px;
+  background-color: var(--primary);
+  position: relative;
+  border-bottom: 1px solid var(--black);
+  transform: skew(-30deg);
+}
+
+.headerImage {
+  position: absolute;
+  right: 20px;
+  top: -20px;
+  transform: skew(30deg);
+}
+
+.leftHeader {
+  width: 300px;
+  background-color: var(--primary);
+}
+
+.rightHeader {
+  padding: 0 60px 0 0;
+}
+
+.subHeader {
+  height: 45px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.subHeaderContainer {
+  overflow-x: auto;
+  white-space: nowrap;
+  height: 45px;
+  display: flex;
+  align-items: centers;
+}
+.subHeaderElement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 120px;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+
+.CopyrightsContainer {
+  display: flex;
+  align-items: center;
+}
+
+.menuModal {
+  position: absolute;
+  z-index: 9999;
+  right: 80px;
+}
+.depositBtn {
+  font-size: 13px;
+}
+
+.footerContainer {
+  padding: 60px 0;
+}
+
+@media (max-width: 992px) {
+  .leftHeader {
+    width: 200px;
+  }
+
+  .imageContainer {
+    width: 250px;
+  }
+
+  .quickLinksContainer,
+  .howToContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .quickLinksContainer p:not(:last-child),
+  .howToContainer p:not(:last-child) {
+    border-right: 1px solid #ccc;
+  }
+  .quickLinksContainer p,
+  .howToContainer p {
+    padding: 0 8px;
+  }
+  .howToContainer {
+    padding-bottom: 15px !important;
+  }
+
+  .socialMediaLinks img {
+    width: 35px !important;
+  }
+  .CopyrightsContainer p {
+    font-size: 14px;
+  }
+  .gamingSubContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .gamingImg {
+    width: 50px;
+    height: auto;
+    object-fit: contain;
+  }
+  .middleContainer {
+    display: none;
+  }
+  .copyWritesInnerContainer {
+    padding: 0 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftHeader {
+    width: 150px;
+  }
+  .imageContainer {
+    width: 200px;
+  }
+  .rightHeader {
+    padding: 0 20px;
+  }
+  .CopyrightsContainer {
+    padding: 0 10px;
+  }
+
+  .CopyrightsContainer p {
+    font-size: 12px;
+  }
+  .gamingImg {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+  }
+  .socialMediaLinks img {
+    width: 45px !important;
+    height: auto;
+  }
+  .subHeader {
+    overflow-x: scroll;
+  }
+  .menuModal {
+    position: absolute;
+    right: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .leftHeader {
+    width: 50px;
+  }
+  .rightHeader {
+    padding: 0 10px;
+  }
+
+  .imageContainer {
+    width: 110px;
+  }
+  .headerImage {
+    width: 80px !important;
+  }
+  .CopyrightsContainer {
+    padding: 0;
+  }
+  .copyWritesInnerContainer {
+    padding: 0px;
+  }
+  .CopyrightsContainer p {
+    font-size: 13px;
+    text-align: center;
+  }
+  .CopyrightsContainer p:last-child {
+    display: none;
+  }
+  .socialMediaLinks {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 253, 253, 0.3);
+  }
+  .socialMediaLinks img {
+    width: 28px !important;
+  }
+  .menuModal {
+    position: absolute;
+
+    right: 10px;
+    width: 200px;
+  }
+  .messageCount {
+    display: none !important;
+  }
+  .gamingImg {
+    width: 30px;
+    height: auto;
+    object-fit: contain;
+  }
+  .whatsappContainer img {
+    width: 30px;
+    height: auto;
+    object-fit: contain;
+  }
+  .whatsappContainer p {
+    font-size: 14px;
+  }
+
+  .paymentFooter img {
+    width: 150px;
+    padding-bottom: 15px;
+  }
+  .paymentFooter,
+  .gamingSubContainer,
+  .quickLinksContainer {
+    border-bottom: 1px solid rgba(255, 253, 253, 0.3);
+  }
+  .loginBtn {
+    font-size: 12px;
+  }
+  .registerBtn {
+    font-size: 12px;
+  }
+  .depositBtn {
+    font-size: 12px;
+    width: 80px !important;
+  }
+  .userBtn {
+    font-size: 12px;
+    width: 80px !important;
+  }
+  .footerContainer .container {
+    width: 90% !important;
+  }
+}
+@media (min-width: 150px) and (max-width: 350px) {
+  .leftHeader {
+    width: 40px !important;
+  }
+  .rightHeader {
+    padding: 0 5px !important;
+  }
+
+  .imageContainer {
+    width: 65px !important;
+  }
+  .headerImage {
+    width: 40px !important;
+  }
+
+  .CopyrightsContainer p {
+    font-size: 10px;
+  }
+
+  .socialMediaLinks img {
+    width: 20px !important;
+  }
+  .menuModal {
+    position: absolute;
+    right: 20px;
+  }
+
+  .gamingImg {
+    width: 30px;
+    height: auto;
+    object-fit: contain;
+  }
+  .whatsappContainer img {
+    width: 30px;
+    height: auto;
+    object-fit: contain;
+  }
+  .whatsappContainer p {
+    font-size: 14px;
+  }
+
+  .loginBtn {
+    font-size: 10px;
+    width: 45px !important;
+  }
+  .registerBtn {
+    font-size: 10px;
+    width: 60px !important;
+  }
+  .depositBtn {
+    font-size: 9px;
+    width: 60px !important;
+  }
+  .userBtn {
+    width: 70px !important;
+  }
+
+  .quickLinksContainer p,
+  .howToContainer p {
+    font-size: 13px;
+  }
+  .paymentFooter img {
+    width: 100px !important;
+  }
+  .menuModal {
+    position: absolute;
+
+    /* right: 10px; */
+    width: 180px !important;
+  }
+}

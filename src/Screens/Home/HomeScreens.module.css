@@ -1,0 +1,74 @@
+/* Parent Container - Full Screen Centering */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  padding: 15px; /* Ensure spacing on very small screens */
+  box-sizing: border-box;
+}
+
+/* Sub Container - Responsive Centered Box */
+.subContainer {
+  width: 70%;
+  max-width: 900px; /* Prevents overly large containers on bigger screens */
+  min-width: 300px; /* Ensures container doesn't shrink too much */
+  background: rgb(223, 219, 219);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  padding: 30px;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for better elevation */
+  /* transition: width 0.3s ease, box-shadow 0.3s ease; */
+}
+
+/* Image Container */
+.imageContainer {
+  max-width: 300px;
+  height: auto;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* transition: max-width 0.3s ease; */
+}
+
+/* Media Queries for Responsive Layout */
+@media (max-width: 1200px) {
+  .subContainer {
+    width: 85%;
+  }
+}
+
+@media (max-width: 992px) {
+  .subContainer {
+    width: 80%;
+    padding: 20px;
+  }
+  .imageContainer {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .subContainer {
+    width: 90%;
+    flex-direction: column; /* Stack content vertically */
+    padding: 20px;
+    margin: 30px 0;
+  }
+  .imageContainer {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .subContainer {
+    width: calc(100% - 30px); /* Small screens fill width but leave margin */
+    padding: 15px;
+  }
+}

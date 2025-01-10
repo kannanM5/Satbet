@@ -1,0 +1,255 @@
+.customButton {
+  width: 100%;
+  height: 60px;
+  border: 0px;
+  border-radius: 6px;
+  background-color: var(--primary);
+  font-family: var(--bold);
+  font-weight: var(--fontweight);
+  outline: none;
+}
+
+.rightImageBtn {
+  width: 9px;
+  height: auto;
+  margin-left: 6px;
+}
+
+.customButton:hover {
+  opacity: 0.8;
+}
+
+.inputBoxContainer {
+  display: flex;
+  align-items: center;
+  height: 38px;
+  width: 100%;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: transparent;
+  border: 1px solid #3f3f3f;
+}
+
+.inputBox {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.errorText {
+  color: var(--danger);
+  margin: 0px 0px 1px 0px;
+  font-family: var(--bold);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.dashboardSection {
+  background: url("../Assests/Png/bgImage.png") no-repeat;
+  background-color: #ebba48;
+  padding: 40px;
+  gap: 10px;
+}
+
+.dashboardSection img {
+  width: 50%;
+  height: auto;
+  object-fit: contain;
+}
+
+.gamesSection {
+  background: url("../Assests/Png/games.png") no-repeat;
+  background-color: var(--black);
+}
+
+.gameContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gameItem {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.CopyrightsContainer {
+  background-color: #ebba48;
+  height: 60px;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.iconContainer {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  background-color: rgb(0, 137, 35);
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.iconContainer img {
+  width: 25px;
+  height: auto;
+}
+
+.animatedImage {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  bottom: 5px;
+  border: 2px solid rgb(0, 137, 35);
+  border-radius: 5px;
+}
+
+.iconParentContainer p {
+  background-color: white;
+  padding: 5px;
+  width: 110px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.weAreHere {
+  position: absolute;
+  top: 30px;
+  width: 95px;
+  right: -15px;
+}
+
+.bouncingLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bouncingLoader > div {
+  width: 12px;
+  height: 12px;
+  margin: 3px 6px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ebba48 0%, #ba8b00 100%);
+  animation: wave 1.2s infinite ease-in-out;
+}
+
+@keyframes wave {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+}
+
+.bouncingLoader > div:nth-child(1) {
+  animation-delay: -0.4s;
+}
+
+.bouncingLoader > div:nth-child(2) {
+  animation-delay: -0.2s;
+}
+
+.bouncingLoader > div:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 768px) {
+  .gamesSectionTitle p:first-child {
+    font-size: 18px !important;
+  }
+
+  .gamesSectionTitle p:last-child {
+    font-size: 14px !important;
+  }
+  .dashboardSection {
+    padding: 20px;
+  }
+  .animatedImage {
+    width: 150px;
+    transform: translateX(20%) translateY(-88%) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .gamesSection .container {
+    width: 90% !important;
+    margin: auto;
+  }
+  .gameContainer img {
+    width: 100%;
+  }
+  .animatedImage {
+    width: 100px;
+    transform: translateX(28%) translateY(-107%) !important;
+  }
+  .iconContainer {
+    width: 40px;
+    height: 40px;
+  }
+
+  .weAreHere {
+    top: 25px !important;
+    width: 80px !important;
+    right: -15px;
+  }
+
+  .iconParentContainer p {
+    width: 80px !important;
+    border-radius: 12px;
+    font-size: 11px !important;
+    padding: 0px;
+  }
+}
+
+@media (min-width: 150px) and (max-width: 350px) {
+  .gamesSectionTitle {
+    align-items: center;
+  }
+  .gamesSectionTitle p:first-child {
+    font-size: 14px !important;
+  }
+
+  .gamesSectionTitle p:last-child {
+    font-size: 10px !important;
+  }
+
+  .gameContainer img {
+    width: 90% !important;
+    margin: auto;
+  }
+
+  .iconContainer {
+    width: 30px;
+    height: 30px;
+  }
+
+  .weAreHere {
+    display: none;
+  }
+
+  .iconContainer img {
+    width: 15px !important;
+    height: auto;
+  }
+
+  .animatedImage {
+    width: 70px;
+    transform: translateX(48%) translateY(-124%) !important;
+  }
+  .closeIon {
+    display: none !important;
+  }
+}
