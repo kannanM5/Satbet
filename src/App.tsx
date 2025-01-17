@@ -1,62 +1,66 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import { routerpaths } from "./Screens/Routes/indexRoute";
 import { useDispatch } from "react-redux";
-import { ThemeContext } from "./Utility/Contexts.tsx";
 import { getCookie } from "./GeneralUtilities/Cookie.tsx";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { StoreUserData } from "./Store/Slices/AuthSlice.tsx";
 
 import FixedFooterContainer from "./Components/FixedFooterContainer.tsx";
+import {
+  StoreDarkThemeColor,
+  StoreIsDarkMode,
+  StorePrimaryColor,
+} from "./Store/Slices/ThemeSlice.tsx";
+import {
+  useDarkTheme,
+  useIsDarkMode,
+  usePrimaryColor,
+} from "./Utility/StoreData.tsx";
 
 const App = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
   const router = createHashRouter(routerpaths);
   const dispatch = useDispatch();
-  const [primaryColor, setprimaryColor] = useState("#ebba48");
-  const [modeColor, setmodeColor] = useState("black");
+  const defaultColor = usePrimaryColor();
+  const isDarkMode = useIsDarkMode();
+  const darktheme = useDarkTheme();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const primaryColor = localStorage.getItem("primaryColor");
+    const mode = localStorage.getItem("mode");
+
+    if (mode === "true") {
+      dispatch(StoreIsDarkMode(true));
+    } else {
+      dispatch(StoreIsDarkMode(false));
+    }
 
     if (savedTheme) {
-      setIsDarkTheme(savedTheme === "dark");
+      dispatch(StoreDarkThemeColor(savedTheme));
+    } else {
+      dispatch(StoreIsDarkMode(!isDarkMode));
+      dispatch(StoreDarkThemeColor(isDarkMode ? "white" : "black"));
     }
     if (primaryColor) {
-      setprimaryColor(primaryColor);
+      dispatch(StorePrimaryColor(primaryColor));
+    } else {
+      dispatch(StorePrimaryColor(defaultColor));
     }
-  }, []);
+  }, [dispatch, defaultColor, darktheme]);
 
   useEffect(() => {
     const userData = getCookie("login");
-
     if (userData) {
       dispatch(StoreUserData(JSON.parse(userData)));
     }
   }, [dispatch]);
 
-  const toggleTheme = () => {
-    const newTheme = !isDarkTheme;
-    setIsDarkTheme(newTheme);
-    setmodeColor(newTheme ? "white" : "black");
-
-    localStorage.setItem("theme", newTheme ? "dark" : "light");
-  };
-
   return (
-    <ThemeContext.Provider
-      value={{
-        isDarkTheme,
-        toggleTheme,
-        primaryColor,
-        setprimaryColor,
-        modeColor,
-      }}
-    >
+    <>
       <RouterProvider router={router} />
 
       <FixedFooterContainer />
-    </ThemeContext.Provider>
+    </>
   );
 };
 

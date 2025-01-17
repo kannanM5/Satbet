@@ -6,7 +6,7 @@ import Payment7 from "../Assests/Png/payment (8).png";
 import { quickLinks, socialMediaLinks } from "../Utility/StaticData";
 import GoToTop from "../Assests/Png/goToTop.png";
 import classes from "../SharedComponents/SharedComponent.module.css";
-import { useTheme } from "../Utility/Contexts";
+import useThemes from "../Hooks/useThemes";
 
 type FooterProps = {
   handleClickTop: () => void;
@@ -17,20 +17,17 @@ type TitleProps = {
 };
 
 const Footer = ({ handleClickTop }: FooterProps) => {
-  const { isDarkTheme, primaryColor } = useTheme();
-
-  const themeStyles = {
-    backgroundColor: isDarkTheme ? "#121212" : "#fff",
-    color: isDarkTheme ? "#fff" : "#000",
-  };
-
+  const getThemeColors = useThemes();
   const Title = ({ title }: TitleProps) => {
     return (
       <p
+        className={`${classes.footerTitle}`}
         style={{
-          color: primaryColor,
+          color: getThemeColors.primaryColor,
           padding: "20px 0",
-          fontWeight: 700,
+          fontWeight: "var(--weightBold)",
+          whiteSpace: "nowrap",
+          fontFamily: "var(--regular)",
         }}
       >
         {title}
@@ -42,26 +39,25 @@ const Footer = ({ handleClickTop }: FooterProps) => {
       <div
         className={`${classes.footerContainer}`}
         style={{
-          backgroundColor: themeStyles.backgroundColor,
+          backgroundColor: getThemeColors.bgColor,
+          borderTop: "1px solid #58585",
         }}
       >
-        <div className={`${classes.container} container`}>
-          <div
-            className={`row d-flex flex-wrap
-               justify-content-between`}
-            // style={{ overflow: "hidden" }}
-          >
-            <div className="col-lg-2 col-12">
+        <div className={`container px-2`}>
+          <div className={`d-flex flex-wrap`}>
+            <div className="col-lg-3 col-12 px-2">
               <img
                 src={Logo}
                 alt="Logo"
-                className="pb-3 pt-3"
+                className={`pb-3 pt-3 ${classes.footerLogo}`}
                 style={{ maxWidth: "150px" }}
               />
               <p
                 style={{
-                  color: themeStyles.color,
-                  opacity: 0.6,
+                  color: getThemeColors.textColor,
+                  opacity: 0.5,
+                  fontFamily: "var(--regular)",
+                  // fontWeight: "var(--weightRegular)",
                 }}
               >
                 We are Satbet, a friendly and honest online casino in India that
@@ -87,7 +83,7 @@ const Footer = ({ handleClickTop }: FooterProps) => {
               </div>
             </div>
 
-            <div className="col-lg-2 col-12">
+            <div className="col-lg-3 col-12 px-2">
               <Title title="QUICK LINKS" />
               <div className={`${classes.quickLinksContainer}`}>
                 {quickLinks.map((ele, ind) => {
@@ -95,9 +91,11 @@ const Footer = ({ handleClickTop }: FooterProps) => {
                     <p
                       key={ind}
                       style={{
-                        color: themeStyles.color,
+                        color: getThemeColors.textColor,
                         marginBottom: "10px",
                         opacity: 0.4,
+                        whiteSpace: "nowrap",
+                        fontFamily: "var(--regular)",
                       }}
                     >
                       {ele?.title}
@@ -107,7 +105,7 @@ const Footer = ({ handleClickTop }: FooterProps) => {
               </div>
             </div>
 
-            <div className="col-lg-2 col-12">
+            <div className="col-lg-3 col-12 px-2">
               <Title title="PAYMENT METHODS" />
               <div className={classes.paymentFooter}>
                 <img
@@ -118,7 +116,7 @@ const Footer = ({ handleClickTop }: FooterProps) => {
               </div>
             </div>
 
-            <div className="col-lg-2 col-12">
+            <div className="col-lg-3 col-12 px-2">
               <Title title="RESPONSIBLE GAMING" />
 
               <div className={`${classes.gamingSubContainer}`}>
@@ -142,42 +140,45 @@ const Footer = ({ handleClickTop }: FooterProps) => {
                   <img src={Payment7} alt="Payment Method" />
                   <p
                     style={{
-                      color: themeStyles.color,
+                      color: getThemeColors.textColor,
                       marginLeft: "10px",
                       opacity: 0.5,
+                      whiteSpace: "nowrap",
+                      fontFamily: "var(--regular)",
                     }}
                   >
                     +91 98766777667
                   </p>
                 </div>
               </div>
-            </div>
+              <div>
+                <Title title="HOW TO" />
 
-            <div className="col-lg-2 col-12">
-              <Title title="HOW TO" />
-
-              <div className={`${classes.howToContainer}`}>
-                <p
-                  style={{
-                    color: themeStyles.color,
-                    opacity: 0.4,
-                    fontSize: "14px",
-                    marginBottom: "5px",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  How to send money
-                </p>
-                <p
-                  style={{
-                    color: themeStyles.color,
-                    opacity: 0.4,
-                    fontSize: "14px",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  How to add beneficiary
-                </p>
+                <div className={`${classes.howToContainer}`}>
+                  <p
+                    style={{
+                      color: getThemeColors.textColor,
+                      opacity: 0.4,
+                      fontSize: "14px",
+                      marginBottom: "5px",
+                      textTransform: "capitalize",
+                      fontFamily: "var(--regular)",
+                    }}
+                  >
+                    How to send money
+                  </p>
+                  <p
+                    style={{
+                      color: getThemeColors.textColor,
+                      opacity: 0.4,
+                      fontSize: "14px",
+                      textTransform: "capitalize",
+                      fontFamily: "var(--regular)",
+                    }}
+                  >
+                    How to add beneficiary
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -185,19 +186,21 @@ const Footer = ({ handleClickTop }: FooterProps) => {
       </div>
 
       <div
-        style={{ backgroundColor: primaryColor, height: "60px" }}
-        className={`${classes.CopyrightsContainer}`}
+        style={{
+          backgroundColor: getThemeColors.primaryColor,
+          height: "60px",
+        }}
+        className={`${classes.CopyrightsContainer} d-flex align-items-center`}
       >
-        <div className="container">
+        <div className={`container`}>
           <div
-            className={`d-flex align-items-center justify-content-between ${classes.copyWritesInnerContainer}`}
+            className={`col-lg-12 d-flex align-items-center  justify-content-between ${classes.copyRightsInner}`}
           >
             <p
               style={{
-                flex: 1,
                 cursor: "pointer",
-                textAlign: "left",
-                color: themeStyles.color,
+                color: getThemeColors.isMode ? "white" : "black",
+                fontFamily: "var(--regular)",
               }}
             >
               Copyrights 2025 © Satbet | All Rights Reserved.
@@ -206,11 +209,11 @@ const Footer = ({ handleClickTop }: FooterProps) => {
             <p
               onClick={handleClickTop}
               style={{
-                fontWeight: 600,
+                fontWeight: "var(--weightSemibold)",
                 cursor: "pointer",
                 paddingRight: "5px",
-                textAlign: "right",
-                color: themeStyles.color,
+                color: getThemeColors.isMode ? "white" : "black",
+                fontFamily: "var(--regular)",
               }}
             >
               Go to top

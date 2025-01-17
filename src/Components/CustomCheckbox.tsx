@@ -1,5 +1,5 @@
 import TickIcon from "../Assests/Png/tick.png";
-import { useTheme } from "../Utility/Contexts";
+// import useThemes from "../Hooks/useThemes";
 import classes from "./component.module.css";
 
 type CustomCheckBoxProps = {
@@ -17,12 +17,7 @@ const CustomCheckBox = ({
   disabled,
   errorText,
 }: CustomCheckBoxProps) => {
-  const { isDarkTheme } = useTheme();
-
-  const themeStyles = {
-    backgroundColor: isDarkTheme ? "#121212" : "#fff",
-    color: isDarkTheme ? "#fff" : "#000",
-  };
+  // const getThemeColors = useThemes();
   return (
     <>
       <div
@@ -36,10 +31,10 @@ const CustomCheckBox = ({
         <div
           onClick={!disabled ? onChange : undefined}
           style={{
-            width: "20px",
-            height: "20px",
+            width: "15px",
+            height: "15px",
             border: "1px solid #000",
-            borderRadius: "5px",
+            borderRadius: "2px",
             backgroundColor: "white",
             display: "flex",
             alignItems: "center",
@@ -52,8 +47,8 @@ const CustomCheckBox = ({
               src={TickIcon}
               alt="tick"
               style={{
-                width: "15px",
-                height: "15px",
+                width: "12px",
+                height: "12px",
               }}
             />
           )}
@@ -61,7 +56,9 @@ const CustomCheckBox = ({
         <label
           style={{
             marginLeft: "10px",
-            color: themeStyles.color,
+            color: "white",
+            fontFamily: "var(--regular)",
+            fontSize: "14px",
           }}
         >
           {label}

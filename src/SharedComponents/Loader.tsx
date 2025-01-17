@@ -6,10 +6,6 @@ const Loader = () => {
       className="d-flex justify-content-center align-items-center"
       style={{
         zIndex: 9999,
-        // position: "absolute",
-        // top: "15%",
-        // left: "25%",
-        // right: "25%",
         position: "fixed",
         top: 0,
         left: 0,

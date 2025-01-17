@@ -82,7 +82,15 @@ const LoginModal = ({ onClickBtn, isLoading }: LoginModalProps) => {
 
   return (
     <div style={{ margin: "0px 20px" }}>
-      <p style={{ textAlign: "center", color: "white" }}>LOGIN</p>
+      <p
+        style={{
+          textAlign: "center",
+          color: "white",
+          fontFamily: "var(--regular)",
+        }}
+      >
+        LOGIN
+      </p>
       <CustomTextBox
         value={values.userName}
         onChange={handleChange("userName")}

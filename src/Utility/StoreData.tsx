@@ -16,3 +16,15 @@ export const useSelectedMenu = () => {
 export const useSelectedTransactionMenu = () => {
   return useSelector((state: ReducerProps) => state.login?.transactionMenu);
 };
+
+export const usePrimaryColor = () => {
+  return useSelector((state: ReducerProps) => state.themes?.primaryColor);
+};
+
+export const useDarkTheme = () => {
+  return useSelector((state: ReducerProps) => state.themes?.darkTheme);
+};
+
+export const useIsDarkMode = () => {
+  return useSelector((state: ReducerProps) => state.themes?.isDarkMode);
+};

@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useUserData } from "../../Utility/StoreData";
 import { useEffect, useState } from "react";
-import { useTheme } from "../../Utility/Contexts";
 import {
   countryDropdownService,
   getPlayerprofileService,
@@ -13,7 +12,7 @@ import {
 import CustomDropdown from "../../Components/CustomDropdown";
 import Loader from "../../SharedComponents/Loader";
 import { CountryCodeDetails } from "../../@types/reducer_types";
-// import CustomDropdown from "../../Components/CustomDropdown";
+import useThemes from "../../Hooks/useThemes";
 
 type CurrencyApiProps = {
   id: number;
@@ -58,7 +57,7 @@ const Profile = () => {
   const userData = useUserData();
   const [country, setcountry] = useState<CountryCodeDetails[]>([]);
   const [isLoading, setisLoading] = useState(false);
-  const { primaryColor } = useTheme();
+  const getThemeColors = useThemes();
 
   const {
     values,
@@ -188,10 +187,14 @@ const Profile = () => {
         <h6
           style={{
             textTransform: "uppercase",
-            color: primaryColor,
+            color: getThemeColors.primaryColor,
             textAlign: "center",
             padding: "15px",
             backgroundColor: "#3A3A3A",
+            fontFamily: "var(--bold)",
+            fontWeight: "var(--weightSemibold)",
+            fontSize: "20px",
+            letterSpacing: "1px",
           }}
         >
           your personal data
@@ -363,7 +366,7 @@ const Profile = () => {
               style={{
                 width: "100px",
                 height: "35px",
-                backgroundColor: primaryColor,
+                backgroundColor: getThemeColors.primaryColor,
                 // background:
                 //   "linear-gradient(180deg,rgb(244, 210, 132) 0%, #BA8B00 100%)",
                 position: "relative",

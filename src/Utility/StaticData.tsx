@@ -282,7 +282,7 @@ export type themeColorProps = {
   color: string;
 };
 
-export const themeColor: themeColorProps[] = [
+export const themeColorData: themeColorProps[] = [
   { id: 1, name: "Yellow", color: "#ebba48" },
   { id: 2, name: "Blue", color: "rgba(0, 0, 255, 1)" },
   { id: 3, name: "Red", color: "rgba(255, 0, 0, 1)" },

@@ -1,4 +1,3 @@
-// import { useTheme } from "../Utility/Contexts";
 import { themeColorProps } from "../Utility/StaticData";
 
 type ThemeModalProsp = {
@@ -7,20 +6,13 @@ type ThemeModalProsp = {
 };
 
 const ThemeModal = ({ data, onClickTheme }: ThemeModalProsp) => {
-  //   const { isDarkTheme, primaryColor } = useTheme();
-
-  //   const themeStyles = {
-  //     backgroundColor: isDarkTheme ? "#121212" : "#fff",
-  //     color: isDarkTheme ? "#fff" : "#000",
-  //   };
-
   return (
     <div>
       {data?.map((ele, ind) => {
         const isLastIndex = ind !== data?.length - 1;
 
         return (
-          <>
+          <div key={ind}>
             <div
               onClick={() => onClickTheme(ele)}
               className="d-flex justify-content-between align-items-center m-2"
@@ -36,10 +28,8 @@ const ThemeModal = ({ data, onClickTheme }: ThemeModalProsp) => {
                 }}
               />
             </div>
-            {isLastIndex && (
-              <div style={{ height: "1px", backgroundColor: "white" }} />
-            )}
-          </>
+            {isLastIndex && <div style={{ border: "0.5px solid #222" }} />}
+          </div>
         );
       })}
     </div>

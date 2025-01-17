@@ -4,9 +4,9 @@ import CustomButton from "../Components/CustomButton";
 import { StoreSelectedMenu } from "../Store/Slices/AuthSlice";
 import { menuData } from "../Utility/StaticData";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../Utility/Contexts";
-import RightBlueIcon from "../Assests/Png/dropright_icon_blue.png";
 import classes from "./Modal.module.css";
+import useThemes from "../Hooks/useThemes";
+import { useUserData } from "../Utility/StoreData";
 
 type MenuModalProps = {
   onClickItem: () => void;
@@ -21,28 +21,43 @@ const MenuModal = ({
 }: MenuModalProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isDarkTheme, primaryColor } = useTheme();
-
-  const themeStyles = {
-    backgroundColor: isDarkTheme
-      ? "linear-gradient(180deg, #333 0%, #111 100%)"
-      : "linear-gradient(180deg, #ddd 0%, #fff 100%)",
-    color: isDarkTheme ? "#fff" : "#000",
-  };
+  const getThemeColors = useThemes();
+  const userData = useUserData();
 
   return (
     <div onClick={onCloseMenuModal}>
       <div
         className={classes.menuModal}
         style={{
-          background: themeStyles?.backgroundColor,
+          background: getThemeColors.bgColor,
         }}
       >
-        <p style={{ color: themeStyles.color }}>Hi User</p>
+        <p
+          style={{
+            // color: getThemeColors.textColor,
+            color: "rgba(206, 203, 203, 0.6)",
+            fontFamily: "var(--regular)",
+            fontSize: "14px",
+            // opacity: 0.7,
+          }}
+        >
+          Hi,
+          <span
+            style={{
+              fontSize: "14x",
+              color: "white",
+              fontWeight: "var(--weightSemibold)",
+              fontFamily: "var(--regular)",
+            }}
+          >
+            {" "}
+            {userData?.userName}
+          </span>
+        </p>
 
         <div
           style={{
-            background: `linear-gradient(45deg,transparent, ${primaryColor}, transparent)`,
+            background: `linear-gradient(45deg,transparent, ${getThemeColors.primaryColor}, transparent)`,
             height: "1px",
             margin: "8px 0px",
           }}
@@ -72,23 +87,19 @@ const MenuModal = ({
                       <p
                         className={classes.menuItem}
                         style={{
-                          color: themeStyles.color,
+                          color: getThemeColors.textColor,
+                          fontFamily: "var(--regular)",
                         }}
                       >
                         {ele?.title}
                       </p>
                     </div>
-                    <img
-                      src={
-                        primaryColor === "#ebba48" ? RightIcon : RightBlueIcon
-                      }
-                      alt="menu-icon"
-                    />
+                    <img src={RightIcon} alt="menu-icon" />
                   </div>
 
                   <div
                     style={{
-                      background: `linear-gradient(45deg,transparent,${primaryColor}, transparent)`,
+                      background: `linear-gradient(45deg,transparent,${getThemeColors.primaryColor}, transparent)`,
                       height: "1px",
                       margin: "5px 0px",
                     }}
@@ -105,8 +116,8 @@ const MenuModal = ({
           style={{
             height: "35px",
             margin: "5px 0px",
-            backgroundColor: primaryColor,
-            color: themeStyles.color,
+            backgroundColor: getThemeColors.primaryColor,
+            color: getThemeColors.textColor,
           }}
         />
       </div>

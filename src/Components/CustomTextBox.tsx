@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "../Components/component.module.css";
 import EyeOpen from "../Assests/Png/eyeOpen.png";
 import EyeClose from "../Assests/Png/eyeClose.png";
-import { useTheme } from "../Utility/Contexts";
+import useThemes from "../Hooks/useThemes";
 
 type CustomTextBox = {
   title?: string;
@@ -30,12 +30,7 @@ const CustomTextBox = ({
   style,
 }: CustomTextBox) => {
   const [isVisible, setisVisible] = useState(true);
-  const { isDarkTheme } = useTheme();
-
-  const themeStyles = {
-    backgroundColor: isDarkTheme ? "#121212" : "#fff",
-    color: isDarkTheme ? "#fff" : "#000",
-  };
+  const getThemeColors = useThemes();
 
   const getType = () => {
     return isSecure ? (isVisible ? "password" : "text") : "text";
@@ -49,7 +44,7 @@ const CustomTextBox = ({
             style={{
               fontFamily: "var(--semi-bold)",
               fontWeight: "var(--fontweight)",
-              color: themeStyles.color,
+              color: getThemeColors.textColor,
             }}
           >
             {title}
@@ -66,7 +61,12 @@ const CustomTextBox = ({
           value={value}
           onChange={onChange}
           type={getType()}
-          style={{ width: isSecure ? "87%" : "100%", color: themeStyles.color }}
+          style={{
+            width: isSecure ? "87%" : "100%",
+            // color: getThemeColors().isMode ? "black" : "white",
+            color: getThemeColors.isMode ? "black" : "white",
+            fontSize: "14px",
+          }}
           maxLength={maxLength}
           disabled={isDisabled}
         />

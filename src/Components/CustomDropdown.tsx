@@ -1,4 +1,5 @@
 import Form from "react-bootstrap/Form";
+import useThemes from "../Hooks/useThemes";
 
 type CustomDropdownProps = {
   data: any[];
@@ -15,15 +16,19 @@ const CustomDropdown = ({
   fieldName,
   value,
 }: CustomDropdownProps) => {
+  const getThemeColors = useThemes();
   return (
     <div className="mb-2 mt-4">
       <Form.Select
         aria-label={defaultTitle}
         value={value ? value[fieldName] : ""}
         style={{
+          height: "38px",
+          fontSize: "14px",
+          fontFamily: "var(--regular)",
           backgroundColor: "transparent",
           border: "1px solid #3f3f3f",
-          color: value ? "white" : "rgba(223, 217, 217, 0.4)",
+          color: value ? getThemeColors.textColor : "rgba(223, 217, 217, 0.4)",
         }}
         onChange={(e) => {
           const selectedValue = e.target.value;

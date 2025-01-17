@@ -14,71 +14,68 @@
   --white: white;
   --inputBorder: 0.5px solid rgba(0, 0, 0, 0.25);
   --black: black;
-  --fontweight: 600;
-  --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  --btnClr: #004c97;
-  --skyBlue: #0076b7;
+  --shadowBtn: 0px 4px 4px 0px rgba(255, 255, 255, 0.15) inset;
   --lightBorder: 1px solid #ebe5e5;
+  --weightRegular: 400;
+  --weightMedium: 500;
+  --weightSemibold: 600;
+  --weightBold: 700;
+  --weightExtrabold: 800;
+  --weightBlack: 900;
 }
 
 @font-face {
   font-family: "Extra-bold-text";
-  src: url("./Assets/Fonts/Poppins-ExtraBold.ttf");
+  src: url("./Assests/Fonts/DMSans-ExtraBold.ttf");
 }
 
 @font-face {
   font-family: "Regular-text";
-  src: url("./Assets/Fonts/Poppins-Regular.ttf");
+  src: url("./Assests/Fonts/DMSans-Regular.ttf");
 }
 
 @font-face {
   font-family: "Medium-text";
-  src: url("./Assets/Fonts/Poppins-Medium.ttf");
+  src: url("./Assests/Fonts/DMSans-Medium.ttf");
 }
 
 @font-face {
   font-family: "Semi-Bold-text";
-  src: url("./Assets/Fonts/Poppins-SemiBoldd.ttf");
+  src: url("./Assests/Fonts/DMSans-SemiBold.ttf");
 }
 
 @font-face {
   font-family: "Bold-text";
-  src: url("./Assets/Fonts/Poppins-Bold.ttf");
+  src: url("./Assests/Fonts/DMSans-Bold.ttf");
 }
 
 p {
   margin: 0px;
 }
 
-.custom-carousel .carousel-control-prev,
-.custom-carousel .carousel-control-next {
-  width: 50px;
-  height: 50px;
+.carousel-indicators [data-bs-target] {
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background-color 0.3s ease;
+  background-color: var(--primary);
+  background-color: #222;
+  border: 1px solid #7e807f;
 }
 
-.custom-carousel .carousel-control-prev-icon,
-.custom-carousel .carousel-control-next-icon {
-  width: 20px;
-  height: 20px;
-  filter: invert(1); /* Makes the arrow white */
-}
-
-.custom-carousel .carousel-item img {
-  width: 400px; /* Adjust width as needed */
-  height: 400px; /* Adjust height as needed */
-  object-fit: cover; /* Ensures the image fills the circular shape */
-  margin: 0 auto; /* Centers the image horizontally */
+.carousel-indicators .active {
+  background-color: var(--primary);
+  border: 1px solid #7e807f;
 }
 
 .form-select {
-  /* opacity: 0.3 !important; */
   border: 1px solid #3f3f3f !important;
   background-color: transparent !important;
-  /* background: url("./Assests/Png/downArrowWhite.png") no-rep/eat; */
+}
+
+.container {
+  max-width: 1170px !important;
+}
+
+.rc-color-picker-panel {
+  width: 100% !important;
 }

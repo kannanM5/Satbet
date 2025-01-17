@@ -7,11 +7,11 @@ import popImage from "../Assests/Png/Satsport-pop-up.jpg";
 import CloseIcon from "../Assests/Png/close_icon.png";
 import WeArehereImage from "../Assests/Png/hiring.svg";
 import { useEffect, useState } from "react";
-import { useTheme } from "../Utility/Contexts";
+import { usePrimaryColor } from "../Utility/StoreData";
 
 const FixedFooterContainer = () => {
   const [isShowPopup, setisShowPopup] = useState(true);
-  const { primaryColor } = useTheme();
+  const primaryColor = usePrimaryColor();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,7 +63,9 @@ const FixedFooterContainer = () => {
               />
             </div>
             <div>
-              <p style={{ fontSize: "13px" }}>Contact us</p>
+              <p style={{ fontSize: "14px", fontFamily: "var(--regular)" }}>
+                Contact us
+              </p>
             </div>
           </div>
 
@@ -74,7 +76,9 @@ const FixedFooterContainer = () => {
               <img src={ChatImage} alt="" />
             </div>
             <div>
-              <p style={{ fontSize: "13px" }}>Get Support</p>
+              <p style={{ fontSize: "14px", fontFamily: "var(--regular)" }}>
+                Get Support
+              </p>
             </div>
           </div>
         </div>

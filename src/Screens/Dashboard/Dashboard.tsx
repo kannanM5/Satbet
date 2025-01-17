@@ -1,7 +1,13 @@
+import DashboardSection from "../../Components/DashboardSection";
+import GamesSection from "../../Components/GamesSection";
+import ImageSwipeer from "../../Components/ImageSwipeer";
+
 const Dashboard = () => {
   return (
     <>
-      <p>Dashboard</p>
+      <ImageSwipeer />
+      <DashboardSection />
+      <GamesSection />
     </>
   );
 };

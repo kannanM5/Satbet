@@ -3,16 +3,11 @@ import SubHeader from "../SharedComponents/SubHeader";
 import { Outlet } from "react-router-dom";
 import Footer from "../SharedComponents/Footer";
 import MenuSubHeader from "../SharedComponents/MenuSubHeader";
-import { useTheme } from "../Utility/Contexts";
+
+import useThemes from "../Hooks/useThemes";
 
 const Dashboardlayout = () => {
-  const { isDarkTheme } = useTheme();
-
-  const themeStyles = {
-    backgroundColor: isDarkTheme ? "#121212" : "#fff",
-    color: isDarkTheme ? "#fff" : "#000",
-  };
-
+  const getThemeColors = useThemes();
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -27,7 +22,9 @@ const Dashboardlayout = () => {
       <SubHeader />
       <MenuSubHeader />
 
-      <div style={{ backgroundColor: themeStyles.backgroundColor }}>
+      <div
+        style={{ backgroundColor: getThemeColors.isMode ? "white" : "#222" }}
+      >
         <Outlet />
       </div>
 

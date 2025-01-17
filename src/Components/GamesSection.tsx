@@ -1,27 +1,22 @@
 import classes from "../Components/component.module.css";
-import { useTheme } from "../Utility/Contexts";
+import useThemes from "../Hooks/useThemes";
 import { games } from "../Utility/StaticData";
 
 const GamesSection = () => {
-  const { isDarkTheme } = useTheme();
-
-  const themeStyles = {
-    backgroundColor: isDarkTheme ? "#121212" : "#fff",
-    color: isDarkTheme ? "#fff" : "#000",
-  };
-
+  const getThemeColors = useThemes();
   return (
     <div
       className={`${classes.gamesSection}`}
-      style={{ backgroundColor: themeStyles.backgroundColor }}
+      style={{ backgroundColor: getThemeColors.bgColor }}
     >
       <div className={`${classes.container} container`}>
         <div className={`row pb-5 pt-5 ${classes.gamesSectionTitle}`}>
           <p
             className="col-8"
             style={{
-              color: themeStyles.color,
+              color: getThemeColors.textColor,
               fontSize: "24px",
+              fontFamily: "var(--medium)",
             }}
           >
             Recently Added Games
@@ -29,10 +24,11 @@ const GamesSection = () => {
           <p
             className="col-4"
             style={{
-              color: "white",
+              color: getThemeColors.textColor,
               fontSize: "18px",
               textAlign: "right",
               cursor: "pointer",
+              fontFamily: "var(--regular)",
             }}
           >
             See More
@@ -41,7 +37,10 @@ const GamesSection = () => {
 
         <div className={`row ${classes.gameContainer}`}>
           {games.map((ele, ind) => (
-            <div className={`col-lg-2 col-md-3 col-sm-4 col-6 mb-4`} key={ind}>
+            <div
+              className={`col-lg-2 col-md-3 col-sm-4 col-xs-5 mb-4 ${classes.gameItemContainer}`}
+              key={ind}
+            >
               <img
                 src={ele.image}
                 alt="game"

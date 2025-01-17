@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 import classes from "../Components/component.module.css";
 
 type CustomButtonProps = {
@@ -10,6 +10,7 @@ type CustomButtonProps = {
   isRightImage?: string;
   className?: string;
   rightImageStyle?: React.CSSProperties;
+  buttonProps?: ComponentProps<"button">;
 };
 
 const CustomButton = ({
@@ -21,6 +22,7 @@ const CustomButton = ({
   isRightImage,
   className,
   rightImageStyle,
+  buttonProps,
 }: CustomButtonProps) => {
   return (
     <button
@@ -29,11 +31,13 @@ const CustomButton = ({
       className={`${className} ${classes.customButton}`}
       disabled={isDisabled}
       onClick={onClick}
+      {...buttonProps}
     >
       {isImage && (
         <img
           src={isImage}
           alt="dollar"
+          className={classes.leftImageBtn}
           style={{
             width: isRightImage ? "12px" : "8px",
             height: "auto",
@@ -49,7 +53,6 @@ const CustomButton = ({
           className={classes.rightImageBtn}
           alt="Account"
           style={rightImageStyle}
-          // style={{ width: "9px", height: "auto", marginLeft: "6px" }}
         />
       )}
     </button>

@@ -1,5 +1,6 @@
 export type ReducerProps = {
   login: LoginReducerProps;
+  themes: ThemeReducerProps;
 };
 
 export type LoginReducerProps = {
@@ -9,7 +10,13 @@ export type LoginReducerProps = {
   transactionMenu: number;
 };
 
-type UserProfileData = {
+export type ThemeReducerProps = {
+  isDarkMode: boolean;
+  primaryColor: string;
+  darkTheme: string;
+};
+
+export type UserProfileData = {
   actionUserName: string;
   activeStatus: number;
   address1: string;

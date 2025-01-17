@@ -4,6 +4,7 @@ import Slider3 from "../Assests/Png/slider3.webp";
 import Slider4 from "../Assests/Png/slider4.webp";
 import Slider5 from "../Assests/Png/slider5.webp";
 import Slider6 from "../Assests/Png/slider6.webp";
+// import Slider7 from "../Assests/Png/slider7.webp";
 
 const data = [
   {
@@ -26,6 +27,22 @@ const data = [
     id: 5,
     image: Slider6,
   },
+  {
+    id: 6,
+    image: Slider3,
+  },
+  {
+    id: 7,
+    image: Slider5,
+  },
+  {
+    id: 8,
+    image: Slider3,
+  },
+  // {
+  //   id: 6,
+  //   image: Slider7,
+  // },
 ];
 
 function ImageSwipeer() {
@@ -34,7 +51,7 @@ function ImageSwipeer() {
       slide={true}
       className="custom-carousel"
       controls={false}
-      style={{ height: "auto" }}
+      style={{ height: "auto", overflow: "hidden" }}
     >
       {data?.map((ele, ind) => {
         return (

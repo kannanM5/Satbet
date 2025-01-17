@@ -15,6 +15,7 @@ import {
   PlayerCurrencyDetails,
 } from "../@types/reducer_types";
 import BouncingDotsLoader from "../Components/BouncingLoader";
+import { usePrimaryColor } from "../Utility/StoreData";
 
 const numberRegex = /^[0-9]*$/;
 const passwordRegex =
@@ -80,13 +81,12 @@ const validationSchema = Yup.object().shape({
 const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
   const [country, setcountry] = useState<CountryCodeDetails[]>([]);
   const [currency, setcurrency] = useState<PlayerCurrencyDetails[]>([]);
-  const { isDarkTheme, primaryColor } = useTheme();
-
-  console.log(country, "country");
+  const primaryColor = usePrimaryColor();
+  const { isDarkTheme } = useTheme();
 
   const themeStyles = {
     backgroundColor: isDarkTheme ? "#121212" : "#fff",
-    color: isDarkTheme ? "#fff" : "#000",
+    color: isDarkTheme ? "#000" : "#fff",
   };
 
   const { values, errors, touched, handleChange, handleSubmit, setFieldValue } =
@@ -147,6 +147,7 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
           textAlign: "center",
           color: themeStyles.color,
           fontSize: "20px",
+          fontFamily: "var(--regular)",
         }}
       >
         AUTOMATIC REGISTER

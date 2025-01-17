@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import classes from "./SharedComponent.module.css";
 import logo from "../Assests/Png/saibet_logo.png";
 import CustomButton from "../Components/CustomButton";
-import { useUserData } from "../Utility/StoreData";
+import { useIsDarkMode, useUserData } from "../Utility/StoreData";
 import { useState } from "react";
 import MenuModal from "../Modals/MenuModal";
 import Dollar from "../Assests/Png/dollar.png";
@@ -12,12 +12,17 @@ import MessageIcon from "../Assests/Png/message.png";
 import { useDispatch } from "react-redux";
 import { StoreSelectedMenu, StoreUserData } from "../Store/Slices/AuthSlice";
 import { deleteCookie } from "../GeneralUtilities/Cookie";
-import { useTheme } from "../Utility/Contexts";
 import LogoutModal from "../Modals/LogoutModal";
 import CustomModal from "../Components/CustomModal";
 import { getSubStringText } from "../Utility/GeneralUtilities";
-import { themeColor } from "../Utility/StaticData";
 import ThemeModal from "../Modals/ThemeModal";
+import {
+  StoreDarkThemeColor,
+  StoreIsDarkMode,
+  StorePrimaryColor,
+} from "../Store/Slices/ThemeSlice";
+import { themeColorData } from "../Utility/StaticData";
+import useThemes from "../Hooks/useThemes";
 
 type HeaderProps = {
   onClickLogin: () => void;
@@ -29,31 +34,33 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useUserData();
+  const isDarkMode = useIsDarkMode();
+  const getThemeColors = useThemes();
   const [menuModal, setmenuModal] = useState(false);
   const [logoutModal, setlogoutModal] = useState(false);
   const [isOpenThemeModal, setisOpenThemeModal] = useState(false);
 
-  const { isDarkTheme, toggleTheme, primaryColor, setprimaryColor } =
-    useTheme();
-
-  const themeStyles = {
-    backgroundColor: isDarkTheme ? "#121212" : "#fff",
-    color: isDarkTheme ? "#fff" : "#000",
+  const handleDarkTheme = () => {
+    const newTheme = isDarkMode ? false : true;
+    dispatch(StoreIsDarkMode(newTheme));
+    dispatch(StoreDarkThemeColor(newTheme ? "white" : "black"));
+    localStorage.setItem("theme", newTheme ? "white" : "black");
+    localStorage.setItem("mode", JSON.stringify(newTheme));
   };
 
   return (
     <>
       <div
         className={`${classes.header}`}
-        style={{ backgroundColor: themeStyles.backgroundColor }}
+        style={{ backgroundColor: getThemeColors.bgColor }}
       >
         <div
           className={` ${classes.leftHeader}`}
-          style={{ backgroundColor: primaryColor }}
+          style={{ backgroundColor: getThemeColors.primaryColor }}
         >
           <div
             className={classes.imageContainer}
-            style={{ backgroundColor: primaryColor }}
+            style={{ backgroundColor: getThemeColors.primaryColor }}
           >
             <img
               src={logo}
@@ -64,16 +71,22 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
           </div>
         </div>
 
-        <div className={classes.middleContainer}>
+        <div
+          className={`d-flex align-items-center ${classes.middleContainer}`}
+          // style={{ width: "220px" }}
+        >
           <CustomButton
-            title={isDarkTheme ? "Dark" : "Light"}
-            onClick={toggleTheme}
+            title={getThemeColors.isMode ? "Dark" : "Light"}
+            onClick={() => {
+              handleDarkTheme();
+            }}
             style={{
-              color: themeStyles?.color,
-              height: "35px",
-              width: "110px",
+              // color: getThemeColors.textColor,
+              height: "30px",
+              width: "60px",
               marginRight: "10px",
-              backgroundColor: primaryColor,
+              backgroundColor: getThemeColors.primaryColor,
+              boxShadow: "var(--shadowBtn)",
             }}
           />
 
@@ -82,11 +95,21 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
             onClick={() => setisOpenThemeModal(true)}
             style={{
               height: "35px",
-              width: "110px",
-              color: themeStyles?.color,
-              backgroundColor: primaryColor,
+              width: "75px",
+              // color: getThemeColors.textColor,
+              backgroundColor: getThemeColors.primaryColor,
+              boxShadow: "var(--shadowBtn)",
+              marginRight: "10px",
             }}
           />
+
+          {/* <CustomSwitch
+            isChecked={isToggleMode}
+            toggleSwitch={() => {
+              setisToggleMode((prev) => !prev);
+              handleDarkTheme();
+            }}
+          /> */}
         </div>
 
         <div className={`${classes.rightHeader}`}>
@@ -100,13 +123,17 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
                   marginRight: "15px",
                 }}
               >
-                <img src={MessageIcon} alt="Message" />
+                <img
+                  src={MessageIcon}
+                  alt="Message"
+                  style={{ boxShadow: "var(--shadowBtn)" }}
+                />
                 <div
                   style={{
                     width: "15px",
                     height: "15px",
                     borderRadius: "10px",
-                    backgroundColor: primaryColor,
+                    backgroundColor: getThemeColors.primaryColor,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -119,7 +146,7 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
                     style={{
                       fontSize: "10px",
                       margin: "0px",
-                      color: themeStyles?.color,
+                      color: getThemeColors.textColor,
                     }}
                   >
                     3
@@ -136,9 +163,10 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
                   width: "90px",
                   height: "35px",
                   marginRight: "10px",
-                  // fontSize: "14px",
+                  fontSize: "14px",
                   fontWeight: 600,
-                  color: themeStyles?.color,
+                  color: "white",
+                  boxShadow: "var(--shadowBtn)",
                   background:
                     "linear-gradient(rgb(73, 72, 72) 0%, rgb(17, 17, 17) 100%)",
                 }}
@@ -151,13 +179,14 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
                 className={classes.userBtn}
                 rightImageStyle={{
                   transform: menuModal ? "rotate(180deg)" : "",
-                  transition: "transform 0.3s ease", // Smooth transition
+                  transition: "transform 0.3s ease",
                 }}
                 style={{
                   width: "100px",
                   height: "35px",
-                  color: themeStyles?.color,
-                  background: primaryColor,
+                  color: "black",
+                  background: getThemeColors.primaryColor,
+                  boxShadow: "var(--shadowBtn)",
                   // "linear-gradient(180deg,rgb(244, 210, 132) 0%, #BA8B00 100%)",
                   position: "relative",
                   fontSize: "13px",
@@ -171,13 +200,15 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
                 onClick={onClickLogin}
                 className={classes.loginBtn}
                 style={{
-                  width: "80px",
+                  width: "65px",
                   height: "35px",
                   marginRight: "10px",
                   fontWeight: 600,
-                  color: themeStyles?.color,
-                  background:
-                    "linear-gradient(rgb(73, 72, 72) 0%, rgb(17, 17, 17) 100%)",
+                  color: getThemeColors.textColor,
+                  fontSize: "14px",
+                  boxShadow: "0px 4px 4px 0px rgba(255, 255, 255, 0.15) inset",
+                  background: "linear-gradient(180deg, #333 0%, #111 100%)",
+                  // "linear-gradient(rgb(73, 72, 72) 0%, rgb(17, 17, 17) 100%)",
                 }}
               />
               <CustomButton
@@ -185,10 +216,12 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
                 onClick={onClickRegister}
                 className={classes.registerBtn}
                 style={{
-                  width: "100px",
+                  width: "85px",
                   height: "35px",
-                  color: themeStyles?.color,
-                  backgroundColor: primaryColor,
+                  fontSize: "14px",
+                  color: getThemeColors.isMode ? "white" : "black",
+                  backgroundColor: getThemeColors.primaryColor,
+                  boxShadow: "0px 4px 4px 0px rgba(255, 255, 255, 0.30) inset",
                   // background:
                   //   "linear-gradient(180deg,rgb(244, 210, 132) 0%, #BA8B00 100%)",
                 }}
@@ -239,12 +272,23 @@ const Header = ({ onClickLogin, onClickRegister }: HeaderProps) => {
           onClose={() => setisOpenThemeModal(false)}
           size="sm"
         >
+          {/* <CustomColorPicker
+            value={""}
+            defaultValue={"#ebba48"}
+            onChange={(color) => {
+              console.log("bf", color);
+              // setisOpenThemeModal(false);
+            }}
+          /> */}
+
           <ThemeModal
-            data={themeColor}
+            data={themeColorData}
             onClickTheme={(ele) => {
-              setprimaryColor(ele.color);
-              setisOpenThemeModal(false);
+              console.log(ele, "ele");
+
               localStorage.setItem("primaryColor", ele?.color);
+              dispatch(StorePrimaryColor(ele?.color));
+              setisOpenThemeModal(false);
             }}
           />
         </CustomModal>

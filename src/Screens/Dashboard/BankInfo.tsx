@@ -1,17 +1,18 @@
-import { useTheme } from "../../Utility/Contexts";
+import useThemes from "../../Hooks/useThemes";
 
 const BankInfo = () => {
-  const { modeColor } = useTheme();
+  const getThemeColors = useThemes();
+
   return (
     <div
       style={{
-        color: modeColor,
+        color: getThemeColors.textColor,
         padding: "50px",
         justifyContent: "center",
         alignItems: "center",
         display: "flex",
         fontSize: "20px",
-        borderBottom: `1px solid ${modeColor}`,
+        borderBottom: `1px solid ${getThemeColors.textColor}`,
       }}
     >
       Bank Information

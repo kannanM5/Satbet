@@ -1,6 +1,8 @@
 .needHelp {
   color: white;
   text-align: left;
+  font-size: 13px;
+  font-family: var(--regular);
 }
 
 .needHelp:hover {
