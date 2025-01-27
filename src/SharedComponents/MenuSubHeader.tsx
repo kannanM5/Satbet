@@ -10,6 +10,7 @@ import {
 } from "../Store/Slices/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import useThemes from "../Hooks/useThemes";
+import { useEffect, useRef } from "react";
 
 const MenuSubHeader = () => {
   const navigate = useNavigate();
@@ -17,6 +18,51 @@ const MenuSubHeader = () => {
   const dispatch = useDispatch();
   const getThemeColors = useThemes();
   const selectedTransaction = useSelectedTransactionMenu();
+  const MenuscrollContainerRef = useRef<any>(null);
+  const selectedMenuscrollContainerRef = useRef<any>(null);
+
+  // Function to handle horizontal scrolling
+  const handleScroll = (event) => {
+    if (MenuscrollContainerRef.current) {
+      event.preventDefault(); // Prevent default vertical scroll behavior
+      MenuscrollContainerRef.current.scrollLeft += event.deltaY * 0.5; // Adjust horizontal scroll
+    }
+  };
+
+  useEffect(() => {
+    const scrollContainer = MenuscrollContainerRef.current;
+
+    if (scrollContainer) {
+      scrollContainer.addEventListener("wheel", handleScroll, {
+        passive: false,
+      });
+
+      return () => {
+        scrollContainer.removeEventListener("wheel", handleScroll);
+      };
+    }
+  }, []);
+
+  const handleScrollSelectedMenu = (event) => {
+    if (selectedMenuscrollContainerRef.current) {
+      event.preventDefault(); // Prevent default vertical scroll behavior
+      selectedMenuscrollContainerRef.current.scrollLeft += event.deltaY * 0.5; // Adjust horizontal scroll
+    }
+  };
+
+  useEffect(() => {
+    const scrollContainer = selectedMenuscrollContainerRef.current;
+
+    if (scrollContainer) {
+      scrollContainer.addEventListener("wheel", handleScrollSelectedMenu, {
+        passive: false,
+      });
+
+      return () => {
+        scrollContainer.removeEventListener("wheel", handleScrollSelectedMenu);
+      };
+    }
+  }, []);
 
   return (
     <>
@@ -31,7 +77,7 @@ const MenuSubHeader = () => {
           whiteSpace: "nowrap",
         }}
       >
-        <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }} ref={MenuscrollContainerRef}>
           <div className="d-flex">
             {menuData?.map((ele, ind) => {
               const isSelected = ele?.id == selectedMenu;
@@ -90,7 +136,7 @@ const MenuSubHeader = () => {
           whiteSpace: "nowrap",
         }}
       >
-        <div style={{ overflowX: "auto" }}>
+        <div style={{ overflowX: "auto" }} ref={selectedMenuscrollContainerRef}>
           <div className="d-flex">
             {selectedMenu == 6 &&
               transactionData?.map((ele, ind) => {

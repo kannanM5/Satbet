@@ -1,80 +1,35 @@
-// import { useEffect, useRef, useState } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { subHeaderData } from "../Utility/StaticData";
 import classes from "./SharedComponent.module.css";
-// import { motion, useSpring, useScroll } from "framer-motion";s
 import useThemes from "../Hooks/useThemes";
-
-// const SubHeader = () => {
-//   const { primaryColor, modeColor } = useTheme();
-
-//   return (
-//     <div
-//       style={{ backgroundColor: primaryColor }}
-//       className={`${classes.subHeader}  d-flex justify-content-center align-items-center`}
-//     >
-//       <div
-//         className={`${classes.subHeaderContainer}`}
-//         // style={{ backgroundColor: primaryColor }}
-//       >
-//         <div className="d-flex">
-//           {subHeaderData?.map((ele, ind) => {
-//             return (
-//               <div key={ind} className={`col-lg-3 ${classes.subHeaderElement}`}>
-//                 <img
-//                   src={ele?.image}
-//                   alt="icons"
-//                   style={{ width: "25px", height: "25px" }}
-//                 />
-//                 <p
-//                   style={{
-//                     textTransform: "uppercase",
-//                     fontWeight: 700,
-//                     fontSize: "12px",
-//                     margin: "0px",
-//                     color: modeColor,
-//                   }}
-//                 >
-//                   {ele?.title}
-//                 </p>
-//               </div>
-//             );
-//           })}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
 
 const SubHeader = () => {
   const getThemeColors = useThemes();
   const [selectedSubMenu, setselectedSubMenu] = useState(-1);
 
-  // const [headerPosition, setHeaderPosition] = useState(0);
+  const scrollContainerRef = useRef<any>(null);
 
-  // const { scrollYProgress } = useScroll();
-  // const scaleX = useSpring(scrollYProgress, {
-  //   stiffness: 100,
-  //   damping: 30,
-  //   restDelta: 0.001,
-  // });
+  // Function to handle horizontal scrolling
+  const handleScroll = (event) => {
+    if (scrollContainerRef.current) {
+      event.preventDefault(); // Prevent default vertical scroll behavior
+      scrollContainerRef.current.scrollLeft += event.deltaY * 0.5; // Adjust horizontal scroll
+    }
+  };
 
-  // Function to handle mouse scroll event for horizontal movement
-  // const handleScroll = (event) => {
-  //   event.preventDefault(); // Prevent the default scroll behavior
-  //   const delta = event.deltaY; // Scroll direction (up/down)
-  //   setHeaderPosition((prevPosition) => prevPosition + delta * 0.1); // Adjust the multiplier for speed
-  // };
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
 
-  // useEffect(() => {
-  //   // Attach the event listener with `{ passive: false }`
-  //   window.addEventListener("wheel", handleScroll, { passive: false });
+    if (scrollContainer) {
+      scrollContainer.addEventListener("wheel", handleScroll, {
+        passive: false,
+      });
 
-  //   // Cleanup the event listener
-  //   return () => {
-  //     window.removeEventListener("wheel", handleScroll);
-  //   };
-  // }, []);
+      return () => {
+        scrollContainer.removeEventListener("wheel", handleScroll);
+      };
+    }
+  }, []);
 
   return (
     <div
@@ -84,6 +39,7 @@ const SubHeader = () => {
       className={`d-flex justify-content-center align-items-center${classes.subHeader}`}
     >
       <div
+        ref={scrollContainerRef}
         style={{
           overflowX: "auto",
           height: "45px",

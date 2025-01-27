@@ -21,6 +21,7 @@ const AuthLayout = () => {
   const [isLoading, setisLoading] = useState(false);
   const dispatch = useDispatch();
   const [registerSuccessModal, setregisterSuccessModal] = useState(false);
+  const [loginSuccessModal, setloginSuccessModal] = useState(false);
 
   useEffect(() => {
     if (registerSuccessModal) {
@@ -30,37 +31,47 @@ const AuthLayout = () => {
     }
   }, [registerSuccessModal]);
 
-  const handlelogin = (data: LoginModalFormikProps) => {
-    setisLoading(true);
-    const payload = {
-      userName: data?.userName || "",
-      password: data?.password || "",
-      captchaToken: data?.captchaToken,
-      captchaInput: data?.captcha,
-    };
+  useEffect(() => {
+    if (loginSuccessModal) {
+      setTimeout(() => {
+        setloginSuccessModal(false);
+      }, 10000);
+    }
+  }, [loginSuccessModal]);
 
-    loginService(payload)
-      .then((res) => {
-        const response = res.data;
-        // if (response.status === 1) {
+  // const handlelogin = (data: LoginModalFormikProps) => {
+  //   setisLoading(true);
+  //   const payload = {
+  //     userName: data?.userName || "",
+  //     password: data?.password || "",
+  //     captchaToken: data?.captchaToken,
+  //     captchaInput: data?.captcha,
+  //   };
 
-        setCookie("login", response);
-        dispatch(StoreUserData(response));
-        handleCloseLoginModal();
-        navigate("/dashboard");
+  //   loginService(payload)
+  //     .then((res) => {
+  //       const response = res.data;
 
-        // } else {
-        // }
-      })
-      .catch((err) => {
-        console.log("error", err);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setisLoading(false);
-        }, 10000);
-      });
-  };
+  //       console.log(response, "response");
+  //       // if (response.status === 1) {
+
+  //       setCookie("login", response);
+  //       dispatch(StoreUserData(response));
+  //       handleCloseLoginModal();
+  //       navigate("/dashboard");
+
+  //       // } else {
+  //       // }
+  //     })
+  //     .catch((err) => {
+  //       console.log("error", err);
+  //     })
+  //     .finally(() => {
+  //       setTimeout(() => {
+  //         setisLoading(false);
+  //       }, 10000);
+  //     });
+  // };
 
   const handleRegiser = (data: RegisterFromikModalProps) => {
     setisLoading(true);
@@ -165,7 +176,11 @@ const AuthLayout = () => {
           <LoginModal
             isLoading={isLoading}
             onClickBtn={(val) => {
-              handlelogin(val);
+              // handlelogin(val);
+            }}
+            onclose={() => {
+              handleCloseLoginModal();
+              setloginSuccessModal(true);
             }}
           />
         </CustomModal>
@@ -194,6 +209,18 @@ const AuthLayout = () => {
           <LogoutModal
             title="REGISTER SUCCESS"
             msg="You have been successfully registered"
+          />
+        </CustomModal>
+      )}
+
+      {loginSuccessModal && (
+        <CustomModal
+          showModal={loginSuccessModal}
+          onClose={() => setloginSuccessModal(false)}
+        >
+          <LogoutModal
+            title="Login SUCCESS"
+            msg="You have been successfully logged in"
           />
         </CustomModal>
       )}

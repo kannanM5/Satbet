@@ -28,7 +28,7 @@
   border-radius: 6px;
   padding: 15px 10px;
   background-color: transparent;
-  border: 1px solid #3f3f3f;
+  /* border: 1px solid #3f3f3f; */
 }
 
 .inputBox {
@@ -88,6 +88,22 @@
   box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+.iconContainerRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+  background-color: #ffbf00;
+}
+
+.iconContainerRight img {
+  width: 40px;
+  height: auto;
+}
+
 .iconContainer img {
   width: 25px;
   height: auto;
@@ -111,10 +127,11 @@
 }
 
 .weAreHere {
-  position: absolute;
-  top: 30px;
-  width: 95px;
-  right: -15px;
+  position: fixed;
+  bottom: 35px;
+  width: 110px;
+  height: auto;
+  right: 2px;
 }
 
 .bouncingLoader {
@@ -130,6 +147,17 @@
   border-radius: 50%;
   background: linear-gradient(180deg, #ebba48 0%, #ba8b00 100%);
   animation: wave 1.2s infinite ease-in-out;
+}
+.invertedtriangele {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 18px solid rgb(0, 137, 35);
 }
 
 @keyframes wave {
@@ -169,47 +197,123 @@
   .dashboardSection {
     padding: 20px;
   }
+
+  @keyframes moveToPosition {
+    from {
+      height: 0;
+      transform: translateX(0%) translateY(0%);
+      bottom: 0;
+      /* opacity: 0; */
+    }
+    to {
+      height: 70px;
+      transform: translateX(45%) translateY(56%);
+      bottom: 90px;
+      /* opacity: 1; */
+    }
+  }
+
   .animatedImage {
-    width: 150px;
-    transform: translateX(20%) translateY(-88%) !important;
+    height: 70px !important;
+    bottom: 90px !important;
+    z-index: 999;
+    animation: moveToPosition 1.5s ease-in-out forwards;
+  }
+
+  .animatedImage img:first-child {
+    height: 69px !important;
+  }
+  .iconParentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .iconParentContainer:first-child {
+    margin-bottom: 30px !important;
+  }
+  .iconContainer {
+    margin-bottom: 0px;
+  }
+  .invertedtriangele {
+    position: absolute;
+    top: 50%; /* Position it vertically at the center of the square */
+    left: -25px; /* Position it to the left of the square */
+    transform: translateY(-50%); /* Center the triangle vertically */
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 20px 15px 0; /* Triangle dimensions */
+    border-color: transparent rgb(0, 137, 35) transparent transparent;
   }
 }
 
 @media (max-width: 576px) {
-  .animatedImage {
-    width: 100px;
-    transform: translateX(28%) translateY(-107%) !important;
-  }
-  .iconContainer {
-    width: 40px;
-    height: 40px;
-  }
-
-  .weAreHere {
-    top: 25px !important;
-    width: 80px !important;
-    right: -15px;
-  }
-
-  .iconParentContainer p {
-    width: 80px !important;
-    border-radius: 12px;
-    font-size: 11px !important;
-    padding: 0px;
-  }
-
   .gameItemContainer {
     width: 48% !important;
   }
   .dashboardSection {
     padding: 10px;
   }
+  .iconContainerRight {
+    width: 40px;
+    height: 40px;
+  }
+
+  .iconContainerRight img {
+    width: 20px;
+  }
+  .weAreHere {
+    bottom: 25px;
+    width: 75px;
+    height: auto;
+  }
+  .iconContainer {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .iconContainer img {
+    width: 20px !important;
+    height: auto;
+  }
+  .iconParentContainer p {
+    width: 80px;
+    font-size: 12px !important;
+  }
+
+  @keyframes moveToPosition {
+    from {
+      height: 0;
+      transform: translateX(0%) translateY(0%);
+      bottom: 0;
+    }
+    to {
+      height: 70px;
+      transform: translateX(55%) translateY(70%);
+      bottom: 90px;
+    }
+  }
+
+  .animatedImage {
+    height: 62px !important;
+    bottom: 90px !important;
+    animation: moveToPosition 1.5s ease-in-out forwards;
+    width: 130px !important;
+  }
+
+  .animatedImage img:first-child {
+    height: 59px !important;
+  }
+  .invertedtriangele {
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    transform: translateY(-50%); /* Center the triangle vertically */
+    border-width: 10px 15px 10px 0; /* Triangle dimensions */
+  }
 }
 
 @media (min-width: 150px) and (max-width: 350px) {
   .leftImageBtn {
-    /* width: 6px !important;
-     */
     display: none;
   }
   .rightImageBtn {
@@ -227,28 +331,24 @@
     font-size: 10px !important;
   }
 
-  /* .gameContainer img {
-    width: 80% !important;
-    margin: auto;
-  } */
-
-  .iconContainer {
-    width: 30px;
-    height: 30px;
-  }
-
-  .weAreHere {
-    display: none;
-  }
-
-  .iconContainer img {
-    width: 15px !important;
-    height: auto;
+  @keyframes moveToPosition {
+    from {
+      height: 0;
+      transform: translateX(0%) translateY(0%);
+      bottom: 0;
+    }
+    to {
+      height: 70px;
+      transform: translateX(98%) translateY(69%);
+      bottom: 90px;
+    }
   }
 
   .animatedImage {
-    width: 70px;
-    transform: translateX(48%) translateY(-124%) !important;
+    height: 62px !important;
+    bottom: 90px !important;
+    animation: moveToPosition 1.5s ease-in-out forwards;
+    width: 70px !important;
   }
   .closeIon {
     display: none !important;

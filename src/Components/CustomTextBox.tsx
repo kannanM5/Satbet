@@ -14,7 +14,7 @@ type CustomTextBox = {
   isSecure?: boolean;
   maxLength?: number;
   isDisabled?: boolean;
-  style?: React.CSSProperties;
+  // style?: React.CSSProperties;
 };
 
 const CustomTextBox = ({
@@ -27,9 +27,10 @@ const CustomTextBox = ({
   isSecure,
   maxLength,
   isDisabled,
-  style,
-}: CustomTextBox) => {
+}: // style,
+CustomTextBox) => {
   const [isVisible, setisVisible] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
   const getThemeColors = useThemes();
 
   const getType = () => {
@@ -54,7 +55,15 @@ const CustomTextBox = ({
           <p style={{ color: "var(--danger)", margin: "-5px 5px 10px" }}>*</p>
         )}
       </div>
-      <div className={`${classes.inputBoxContainer}`} style={style}>
+      <div
+        className={`${classes.inputBoxContainer}`}
+        style={{
+          border: `1px solid ${
+            isFocused ? getThemeColors.primaryColor : "#3f3f3f"
+          }`,
+          transition: "border 0.3s ease",
+        }}
+      >
         <input
           placeholder={placeholder}
           className={classes.inputBox}
@@ -69,6 +78,8 @@ const CustomTextBox = ({
           }}
           maxLength={maxLength}
           disabled={isDisabled}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
         {isSecure && (
           <div className="d-flex justify-content-end " style={{ width: "13%" }}>

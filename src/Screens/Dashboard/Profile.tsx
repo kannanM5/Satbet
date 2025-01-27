@@ -13,6 +13,8 @@ import CustomDropdown from "../../Components/CustomDropdown";
 import Loader from "../../SharedComponents/Loader";
 import { CountryCodeDetails } from "../../@types/reducer_types";
 import useThemes from "../../Hooks/useThemes";
+import CustomDatePicker from "../../Components/CustomDatePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 type CurrencyApiProps = {
   id: number;
@@ -36,7 +38,7 @@ type ProfileFormikValues = {
   lastName: string;
   address: string;
   email: string;
-  dob: string;
+  dob: Dayjs | null;
   country: string;
   city: string;
   currency: CurrencyApiProps | null;
@@ -74,7 +76,7 @@ const Profile = () => {
       lastName: "",
       email: "",
       address: "",
-      dob: "",
+      dob: null,
       country: "",
       city: "",
       currency: null,
@@ -90,8 +92,8 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    handleGetProfileData();
     handleCountryDropdown();
+    handleGetProfileData();
   }, [userData]);
 
   const handleGetProfileData = () => {
@@ -100,12 +102,27 @@ const Profile = () => {
       .then((res) => {
         const response = res.data;
 
-        console.log(response, "response");
+        // console.log(response, "response");
 
-        const selectedCountry = country?.find(
-          (ele) => ele?.id === response?.countryIsdcodeDetails?.id
-        );
-        console.log(selectedCountry, "selectedCountry");
+        // const selectedCountry = country?.find((ele) => {
+        //   console.log(
+        //     ele.id,
+        //     "ssghgh",
+        //     1 === response?.countryIsdcodeDetails?.id,
+        //     ele?.id
+        //   );
+
+        //   return 1 === response?.countryIsdcodeDetails?.id;
+        // });
+        // console.log(selectedCountry, "selectedCountry hgdfh");
+
+        const selectedCountry = {
+          ...response?.countryIsdcodeDetails,
+          label: response?.countryIsdcodeDetails?.name,
+          value: response?.countryIsdcodeDetails?.name,
+        };
+
+        console.log(selectedCountry, "selectedCountry hgdfh");
 
         setValues((prevValues) => ({
           ...prevValues,
@@ -115,7 +132,7 @@ const Profile = () => {
           email: response?.email || "",
           address: "",
           dob: response?.dob || "",
-          country: response?.countryIsdcodeDetails || null,
+          country: selectedCountry || null,
           city: response?.city || "",
           currency: response?.playerCurrencyDetails || null,
           state: response?.state || "",
@@ -166,6 +183,7 @@ const Profile = () => {
     countryDropdownService()
       .then((res) => {
         const response = res.data;
+
         setcountry(response);
       })
       .catch((err) => {
@@ -250,12 +268,22 @@ const Profile = () => {
             </div>
 
             <div className="col-lg-6">
-              <CustomTextBox
+              {/* <CustomTextBox
                 value={values.dob}
                 onChange={handleChange("dob")}
                 placeholder="Date of birth"
                 style={{ height: "45px" }}
                 errorText={errors.dob && touched.dob ? errors.dob : ""}
+              /> */}
+
+              <CustomDatePicker
+                value={values?.dob}
+                onChange={(date) => {
+                  setFieldValue(
+                    "dob",
+                    date ? dayjs(date).format("YYYY-MM-DD") : null
+                  );
+                }}
               />
             </div>
 
@@ -279,7 +307,7 @@ const Profile = () => {
                   errors.country && touched.country ? errors.country : ""
                 }
               /> */}
-
+              {/* 
               <CustomDropdown
                 data={country}
                 fieldName="name"
@@ -288,6 +316,17 @@ const Profile = () => {
                   setFieldValue("selectedCountry", val);
                 }}
                 defaultTitle="Select Country"
+              /> */}
+
+              <CustomDropdown
+                options={country}
+                value={values.country}
+                fieldName="name"
+                valueName="name"
+                Placeholder="Select country"
+                onChange={(val) => {
+                  setFieldValue("country", val);
+                }}
               />
 
               {/* <CustomTextBox

@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@rc-component/color-picker": "^2.0.1",
     "@reduxjs/toolkit": "^2.5.0",
+    "antd": "^5.23.1",
     "axios": "^1.7.9",
     "boostrap": "^2.0.0",
     "bootstrap": "^5.3.3",
+    "dayjs": "^1.11.13",
     "formik": "^2.4.6",
     "framer-motion": "^11.16.4",
     "motion": "^11.16.4",

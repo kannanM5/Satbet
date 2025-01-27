@@ -9,7 +9,6 @@ import {
   countryDropdownService,
   currencyDropdownService,
 } from "../Services/Services";
-import { useTheme } from "../Utility/Contexts";
 import {
   CountryCodeDetails,
   PlayerCurrencyDetails,
@@ -82,12 +81,6 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
   const [country, setcountry] = useState<CountryCodeDetails[]>([]);
   const [currency, setcurrency] = useState<PlayerCurrencyDetails[]>([]);
   const primaryColor = usePrimaryColor();
-  const { isDarkTheme } = useTheme();
-
-  const themeStyles = {
-    backgroundColor: isDarkTheme ? "#121212" : "#fff",
-    color: isDarkTheme ? "#000" : "#fff",
-  };
 
   const { values, errors, touched, handleChange, handleSubmit, setFieldValue } =
     useFormik<RegisterFromikModalProps>({
@@ -120,6 +113,7 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
     countryDropdownService()
       .then((res) => {
         const response = res.data;
+
         setcountry(response);
       })
       .catch((err) => {
@@ -132,6 +126,7 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
     currencyDropdownService()
       .then((res) => {
         const response = res.data;
+
         setcurrency(response);
       })
       .catch((err) => {
@@ -140,12 +135,13 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
       .finally(() => {});
   };
 
+  console.log(values?.country, "country");
+
   return (
     <div style={{ margin: "0px 20px" }}>
       <p
         style={{
           textAlign: "center",
-          color: themeStyles.color,
           fontSize: "20px",
           fontFamily: "var(--regular)",
         }}
@@ -179,7 +175,7 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
             : ""
         }
       />
-
+      {/* 
       <CustomDropdown
         data={country}
         fieldName="name"
@@ -189,17 +185,43 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
           console.log(val);
         }}
         defaultTitle="Select Country"
+      /> */}
+
+      <CustomDropdown
+        options={country}
+        value={values.country}
+        fieldName="name"
+        valueName="name"
+        Placeholder="Select country"
+        onChange={(val) => {
+          console.log(val, "value");
+
+          setFieldValue("country", val);
+        }}
       />
 
       <div className="d-flex justify-content-between">
         <div className="col-3">
-          <CustomDropdown
+          {/* <CustomDropdown
             data={country}
             fieldName="code"
             value={values.countryCode}
             defaultTitle="Code"
             onChange={(val) => {
               console.log(val);
+              setFieldValue("countryCode", val);
+            }}
+          /> */}
+
+          <CustomDropdown
+            options={country}
+            value={values.countryCode}
+            fieldName="code"
+            valueName="code"
+            Placeholder="Code"
+            onChange={(val) => {
+              console.log(val, "value");
+
               setFieldValue("countryCode", val);
             }}
           />
@@ -226,7 +248,7 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
         errorText={errors.email && touched.email ? errors.email : ""}
       />
 
-      <CustomDropdown
+      {/* <CustomDropdown
         data={currency}
         fieldName="name"
         value={values.currency}
@@ -234,6 +256,19 @@ const RegisterModal = ({ onClickBtn, isLoading }: RegisterModalProps) => {
         onChange={(val) => {
           setFieldValue("currency", val);
           console.log(val);
+        }}
+      /> */}
+
+      <CustomDropdown
+        options={currency}
+        value={values.currency}
+        fieldName="name"
+        valueName="name"
+        Placeholder="Select currency"
+        onChange={(val) => {
+          console.log(val, "value");
+
+          setFieldValue("currency", val);
         }}
       />
 

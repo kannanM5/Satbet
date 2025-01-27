@@ -79,3 +79,85 @@ p {
 .rc-color-picker-panel {
   width: 100% !important;
 }
+
+.form-select {
+  /* border: 1px solid black !important;s */
+}
+
+.form-control:focus {
+  border-color: #222;
+  box-shadow: none;
+}
+
+.ant-picker
+  ant-picker-invalid
+  ant-picker-outlined
+  css-dev-only-do-not-override-nqoqt9 {
+  box-shadow: none;
+}
+
+/* .ant-picker .ant-picker-input > input {
+  color: white;
+} */
+
+.ant-picker-dropdown .ant-picker-panel-container {
+  border-radius: 0px !important;
+}
+
+/* .ant-carousel .slick-dots li button:hover {
+  opacity: 0;
+} */
+/* .ant-carousel .slick-dots li:hover {
+  opacity: 0;
+} */
+
+/* .ant-carousel .slick-dots li.slick-active button:hover {
+  opacity: 0;
+  background-color: transparent;
+} */
+
+/* .ant-carousel .slick-dots li button:focus {
+  opacity: 0;
+}
+
+.ant-carousel .slick-dots li.slick-active button:hover {
+  opacity: 0;
+}
+
+:where(.css-dev-only-do-not-override-rcq0tz).ant-carousel
+  .slick-dots
+  li
+  button:hover {
+  opacity: 0;
+  background-color: #222;
+} */
+
+:where(.css-dev-only-do-not-override-rcq0tz).ant-carousel
+  .slick-dots
+  li
+  button:hover,
+:where(.css-dev-only-do-not-override-rcq0tz).ant-carousel
+  .slick-dots
+  li
+  button:focus {
+  opacity: 1;
+  background-color: transparent;
+}
+
+.ant-carousel .slick-dots li {
+  opacity: 1 !important;
+}
+@media (max-width: 576px) {
+  .ant-carousel .slick-dots li {
+    width: 8px !important;
+    height: 8px !important;
+  }
+  .ant-carousel .slick-dots li.slick-active button {
+    width: 8px !important;
+    height: 8px !important;
+  }
+  .ant-carousel .slick-dots li button {
+    width: 8px !important;
+    height: 8px !important;
+  }
+}
